@@ -4,7 +4,6 @@ import { Text, DeviceEventEmitter } from 'react-native';
 
 export const auth = () => {
 
-    const [wasUp, setWasUp] = useState('We Not In!');
     const [sensor, setSensor] = useState('Naathing Bro');
 
     useEffect(() => {
@@ -13,25 +12,27 @@ export const auth = () => {
         });
 
         async function performAuth(){
-            const { biometryType } = await checkSensor();
-            setSensor(biometryType);
-            console.log('====================================');
-            console.log(biometryType);
-            console.log('====================================');
+            checkSensor().then((biometryType ) => {
+                setSensor(biometryType );
 
-            const { description } = await authUser();
-            setWasUp(description);
-            console.log('.....................................');
-            console.log(description);
-            console.log('.....................................');
+                if(biometryType ){
+                    try {
+                        authUser().then().catch();
+                    } catch (error) {
+                        
+                    }
+                   
+                }
+
+            }).catch();
         }
         performAuth();
     }, []);
 
     const authUser = async () => {
         const authConfig = {
-            title: 'Login w/ Biometrics',
-            subTitle: 'This issa description',
+            title: `Login to nigel`,
+            subTitle: 'some smart description',
             cancelButton: 'Cancel',
             onAttempt: () => { console.log('We failed dawg!'); }
         };
@@ -45,8 +46,7 @@ export const auth = () => {
 
     return (
         <>
-            <Text style={{color: 'black', backgroundColor: 'red'}}>{sensor}</Text>
-            <Text style={{color: 'black',  backgroundColor: 'blue'}}>{wasUp}</Text>
+            <Text style={{color: 'black', backgroundColor: 'red', fontSize: 50}}>{sensor}</Text>
         </>
     );
 }

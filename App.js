@@ -40,7 +40,7 @@ const App = () => {
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <Text>Heyyyyyyyyyyyyyyyyyyyyyyyyyy!</Text>
+      <Text>Sup Bro, just using you to test this </Text>
       <Auth />
     </SafeAreaView>
   );
